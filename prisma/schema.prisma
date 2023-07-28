@@ -1,0 +1,16 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Proxy {
+  id       Int     @id @default(autoincrement())
+  ip       String
+  port     Int
+  login    String?
+  password String?
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
