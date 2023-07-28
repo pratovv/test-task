@@ -1,7 +1,6 @@
 const axios = require('axios');
 const { PrismaClient } = require('@prisma/client');
 const { Worker, isMainThread, parentPort, workerData } = require('worker_threads');
-const os = require('os');
 
 const prisma = new PrismaClient();
 
@@ -74,7 +73,7 @@ async function getDataUsingProxiesForArticles(articles) {
 
 async function main() {
     try {
-        const numThreads = 5;
+        const numThreads = os.cpus().length - 1;
         const articlesPerThread = Math.ceil(5000 / numThreads);
         const allArticles = Array.from({length: 5000}, (_, index) => index + 1);
 
